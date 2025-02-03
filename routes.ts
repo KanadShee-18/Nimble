@@ -1,4 +1,4 @@
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = "/";
 
 export const publicRoutes = ["/", "/auth/email-confirmation"];
 

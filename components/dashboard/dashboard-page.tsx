@@ -3,7 +3,7 @@ import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import BackButton from "../auth/back-button";
 
-interface UserProps {
+export interface UserProps {
   name?: string | null | undefined;
   email?: string | null | undefined;
   image?: string | null | undefined;

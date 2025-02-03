@@ -102,7 +102,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="text"
                           placeholder="Enter your code here"
-                          className="shadow-sm text-center shadow-blue-700 text-blue-400"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-500"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />
@@ -127,7 +127,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="email"
                           placeholder="Enter registered email address"
-                          className="shadow-sm shadow-blue-700 text-blue-400"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-500"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />
@@ -146,7 +146,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="password"
                           placeholder="Enter your password"
-                          className="shadow-sm shadow-blue-700 text-blue-400"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-600"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />
@@ -161,7 +161,7 @@ const LoginForm = () => {
 
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-slate-700 active:bg-blue-500"
+            className="w-full bg-indigo-600 hover:bg-slate-700 active:bg-indigo-500"
             disabled={loading}
             variant={"secondary"}
           >
