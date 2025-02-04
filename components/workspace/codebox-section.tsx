@@ -1,6 +1,9 @@
 "use client";
 
+import { MessageContext } from "@/context/MessageContext";
+import { api } from "@/convex/_generated/api";
 import { PROVIDED_DEPENDENCIES } from "@/utils/constant";
+import Prompt from "@/utils/Prompt";
 import {
   SandpackProvider,
   SandpackLayout,
@@ -8,14 +11,78 @@ import {
   SandpackPreview,
   SandpackFileExplorer,
 } from "@codesandbox/sandpack-react";
+import axios from "axios";
+import { useConvex, useMutation } from "convex/react";
+import { useParams } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
 
 const CodeSection = () => {
+  const { id } = useParams();
+  const convex = useConvex();
   const [activeTab, setActivetab] = useState("code");
   const [files, setFiles] = useState(PROVIDED_DEPENDENCIES.DEFAULT_FILE);
+
+  const { messages, setMessages } = useContext(MessageContext);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const UpdateCode = useMutation(api.workspace.UpdateCodeFiles);
+
+  const GenerateCode = async () => {
+    setLoading(true);
+    const PROMPT = JSON.stringify(messages) + " " + Prompt.CODE_GEN_PROMPT;
+    const result = await axios.post("/api/gen-ai-code", {
+      prompt: PROMPT,
+    });
+    console.log("Ai code gen response: ", result?.data);
+
+    const aiRes = result?.data;
+
+    const mergedFiles = {
+      ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
+      // @ts-ignore
+      ...aiRes?.files,
+    };
+    setFiles(mergedFiles);
+    await UpdateCode({
+      // @ts-ignore
+      workspaceId: id,
+      // @ts-ignore
+      fileData: aiRes.files,
+    });
+    setLoading(false);
+  };
+
+  const existingCodeFiles = async () => {
+    setLoading(true);
+    const result = await convex.query(api.workspace.GetWorkSpace, {
+      // @ts-ignore
+      workspaceId: id,
+    });
+    const mergedFiles = {
+      ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
+      ...result?.fileData,
+    };
+    setFiles(mergedFiles);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    id && existingCodeFiles();
+  }, [id]);
+
+  useEffect(() => {
+    if (messages?.length > 0) {
+      const role = messages[messages?.length - 1].role;
+      if (role === "user") {
+        GenerateCode();
+      }
+    }
+  }, [messages]);
+
   return (
-    <div>
+    <div className="relative">
       <div className="bg-[#181818] mb-1 w-full p-2 border rounded-md">
         <div className="flex text-sm flex-wrap shrink-0 bg-[#070707] w-fit justify-start items-center rounded-2xl">
           <h2
@@ -57,6 +124,12 @@ const CodeSection = () => {
           )}
         </SandpackLayout>
       </SandpackProvider>
+      {loading && (
+        <div className="p-10 bg-gray-900 bg-opacity-50 absolute top-0 rounded-md w-full h-full gap-3 flex items-center justify-center backdrop-blur-sm">
+          <BeatLoader className=" w-20 h-auto text-white" color="#c1ccf7" />
+          <h2 className="text-indigo-200 text-3xl">Getting files ready ...</h2>
+        </div>
+      )}
     </div>
   );
 };

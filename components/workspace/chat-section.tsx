@@ -116,12 +116,12 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`${msg.role === "user" ? "bg-zinc-800" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7"} leading-7`}
+              className={`${msg.role === "user" ? "bg-zinc-800 rounded-bl-none" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl  shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7 rounded-br-none"} leading-5`}
             >
               <div
                 className={`absolute w-5 h-5 rounded-br-full   -bottom-[1px] ${msg.role === "user" ? "left-0" : "right-0"}
                 ${msg.role === "user" ? "-rotate-90" : "-rotate-180"}
-                  bg-gradient-to-br from-slate-800 to-indigo-600`}
+                  bg-gradient-to-br from-slate-900 opacity-55 to-indigo-600`}
               ></div>
               {msg.role === "user" && (
                 <div>
@@ -141,7 +141,9 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
                 </div>
               )}
 
-              <ReactMarkDown className={`flex flex-col text-zinc-300`}>
+              <ReactMarkDown
+                className={`flex text-wrap overflow-hidden flex-col text-zinc-300`}
+              >
                 {msg.content}
               </ReactMarkDown>
             </div>
