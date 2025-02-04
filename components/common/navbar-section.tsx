@@ -10,7 +10,7 @@ import UserButton from "./manage-user";
 const NavBar = async () => {
   const user = await currentUser();
   return (
-    <div className="p-4 flex justify-between items-center text-sm">
+    <div className="p-4 w-full fixed top-0 flex justify-between items-center text-sm z-[100] backdrop-blur-md">
       <Image src={LOGO} alt="Nimble" quality={100} width={40} height={40} />
       <div className="flex items-center gap-x-5">
         {!user && (

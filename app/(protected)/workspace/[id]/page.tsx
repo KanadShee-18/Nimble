@@ -6,13 +6,15 @@ import React from "react";
 export default async function WorkSpace() {
   const user = await currentUser();
   return (
-    <div className="p-10">
+    <div className="p-10 pt-24 max-h-full overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <ChatSecion
-          userName={user?.name}
-          userEmail={user?.email}
-          userImage={user?.image}
-        />
+        <div className="relative">
+          <ChatSecion
+            userName={user?.name}
+            userEmail={user?.email}
+            userImage={user?.image}
+          />
+        </div>
         <div className="col-span-2">
           <CodeSection />
         </div>

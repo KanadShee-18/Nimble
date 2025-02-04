@@ -18,10 +18,23 @@ export const createWorkspace = mutation({
 
 export const GetWorkSpace = query({
   args: {
-    workspaceId: v.string(),
-  }, 
-  handler: async(ctx, args) => {
+    workspaceId: v.id("workspace"),
+  },
+  handler: async (ctx, args) => {
     const result = await ctx.db.get(args.workspaceId as Id<"workspace">);
     return result;
-  }
-})
+  },
+});
+
+export const UpdateMessages = mutation({
+  args: {
+    workspaceId: v.id("workspace"),
+    messages: v.any(),
+  },
+  handler: async (ctx, args) => {
+    const result = ctx.db.patch(args.workspaceId as Id<"workspace">, {
+      messages: args.messages,
+    });
+    return result;
+  },
+});
