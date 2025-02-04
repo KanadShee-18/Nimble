@@ -10,7 +10,9 @@ export default defineSchema({
   }),
   workspace: defineTable({
     fileData: v.optional(v.any()),
-    messages: v.any(),
+    messages: v.optional(
+      v.array(v.object({ role: v.string(), content: v.string() }))
+    ),
     user: v.id("users"),
   }),
 });

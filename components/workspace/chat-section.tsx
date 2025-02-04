@@ -15,6 +15,7 @@ import { ArrowRight, Link } from "lucide-react";
 import axios from "axios";
 import Prompt from "@/utils/Prompt";
 import ReactMarkDown from "react-markdown";
+import { BeatLoader } from "react-spinners";
 
 interface Message {
   role: "user"; // Add more roles if needed
@@ -60,7 +61,8 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
       // @ts-ignore
       workspaceId: id,
     });
-    setMessages(result?.messages);
+    // setMessages(result?.messages);
+    setMessages(Array.isArray(result?.messages) ? result.messages : []);
     console.log("Workspace result: ", result);
   };
 
@@ -111,7 +113,7 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   return (
     <div className="h-[85vh] relative flex flex-col ">
       <div className="flex-1 overflow-y-scroll ">
-        {messages &&
+        {messages && Array.isArray(messages) ? (
           // @ts-ignore
           messages?.map((msg, index) => (
             <div
@@ -147,7 +149,12 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
                 {msg.content}
               </ReactMarkDown>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="w-full flex items-center justify-center">
+            <BeatLoader className="w-20 h-auto" color="#c1ccf7" />
+          </div>
+        )}
         {loading && (
           <div
             className={`h-20 p-3 rounded-lg bg-zinc-800 animate-pulse relative w-11/12 mx-auto`}

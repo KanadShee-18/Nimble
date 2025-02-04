@@ -116,7 +116,12 @@ const CodeSection = () => {
           {activeTab === "code" && (
             <>
               <SandpackFileExplorer style={{ height: "80vh" }} />
-              <SandpackCodeEditor style={{ height: "80vh" }} />
+              <SandpackCodeEditor
+                style={{ height: "80vh" }}
+                showLineNumbers={true}
+                showInlineErrors={true}
+                closableTabs={true}
+              />
             </>
           )}
           {activeTab === "preview" && (
