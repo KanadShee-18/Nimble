@@ -4,8 +4,10 @@ import { SidebarFooterDefault } from "@/utils/constant";
 import React from "react";
 import { Button } from "../ui/button";
 import LogoutButton from "../auth/logout-button";
+import { useRouter } from "next/navigation";
 
 const SidebarFooter = () => {
+    const router = useRouter();
   return (
     <div className="flex flex-col gap-y-2 w-full">
       {SidebarFooterDefault.map((item) => (
@@ -21,6 +23,7 @@ const SidebarFooter = () => {
             </LogoutButton>
           ) : (
             <Button
+                onClick={() => item.path && router.push(item?.path)}
               key={item?.id}
               className="w-full flex justify-between bg-indigo-500 bg-opacity-20 text-indigo-300 group hover:bg-opacity-30 hover:bg-indigo-600 shadow-sm shadow-slate-950"
             >
