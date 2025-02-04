@@ -116,10 +116,10 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`${msg.role === "user" ? "bg-zinc-800" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-md shadow-sm shadow-indigo-700 mb-5 relative w-11/12 lg:w-10/12 ${msg.role === "ai" && "ml-auto pb-7"} leading-7`}
+              className={`${msg.role === "user" ? "bg-zinc-800" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7"} leading-7`}
             >
               <div
-                className={`absolute w-5 h-5 rounded-br-full  bottom-0 ${msg.role === "user" ? "left-0" : "right-0"}
+                className={`absolute w-5 h-5 rounded-br-full   -bottom-[1px] ${msg.role === "user" ? "left-0" : "right-0"}
                 ${msg.role === "user" ? "-rotate-90" : "-rotate-180"}
                   bg-gradient-to-br from-slate-800 to-indigo-600`}
               ></div>
