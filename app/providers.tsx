@@ -4,7 +4,6 @@ import NavBar from "@/components/common/navbar-section";
 import { MessageProvider } from "@/context/MessageContext";
 import { UserDetailsProvider } from "@/context/UserDetailsContext";
 import ConvexClientProvider from "./ConvexClientProvider";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/sidebar-section";
 
 interface ProviderProps {
@@ -17,18 +16,16 @@ const Providers = ({ children }: ProviderProps) => {
       <ConvexClientProvider>
         <UserDetailsProvider>
           <MessageProvider>
-            <SidebarProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <AppSidebar />
-                <NavBar />
-                {children}
-              </ThemeProvider>
-            </SidebarProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <AppSidebar />
+              <NavBar />
+              {children}
+            </ThemeProvider>
           </MessageProvider>
         </UserDetailsProvider>
       </ConvexClientProvider>

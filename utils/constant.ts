@@ -1,3 +1,5 @@
+import { HelpCircleIcon, LogOutIcon, Settings, Wallet2 } from "lucide-react";
+
 export const UTILITY = {
   LABEL: "#a3a3a3",
   SUBHEADING: "#d1d5db",
@@ -79,3 +81,26 @@ export default config;
     "chart.js": "^4.4.7",
   },
 };
+
+export const SidebarFooterDefault = [
+  {
+    name: "Settings",
+    icon: Settings,
+    id: 1,
+  },
+  {
+    name: "Help Center",
+    icon: HelpCircleIcon,
+    id: 2,
+  },
+  {
+    name: "Subscription",
+    icon: Wallet2,
+    id: 3,
+  },
+  {
+    name: "Sign out",
+    icon: LogOutIcon,
+    id: 4,
+  },
+];
