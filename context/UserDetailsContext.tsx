@@ -17,6 +17,7 @@ export type UserType = {
   name: string;
   email: string;
   image?: string;
+  token?: number;
 } | null;
 
 interface UserDetailsContextProps {

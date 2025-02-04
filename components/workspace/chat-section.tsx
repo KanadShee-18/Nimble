@@ -34,12 +34,20 @@ export interface UserProps {
 
 type Messages = Message[];
 
+export const CountTokenUsed = (inputText: string) => {
+  return inputText
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word).length;
+};
+
 const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   const { id } = useParams();
   console.log(id);
   const endRef = useRef<HTMLDivElement | null>(null);
   const convex = useConvex();
   const [userInput, setUserInput] = useState<string>("");
+  const UpdateUserToken = useMutation(api.users.UpdateTokenUsed);
 
   const { messages, setMessages } = useContext(MessageContext);
   const UpdateMessages = useMutation(api.workspace.UpdateMessages);
@@ -100,11 +108,24 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
 
     // @ts-ignore
     setMessages((prev) => [...prev, aiResponse]);
+
     await UpdateMessages({
       messages: [...messages, aiResponse],
       //@ts-ignore
       workspaceId: id,
     });
+
+    if (userDetails?.token) {
+      const token =
+        userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiResponse)));
+      // Update the token count in convex db:
+      await UpdateUserToken({
+        // @ts-ignore
+        userId: userDetails._id,
+        token: token,
+      });
+    }
+
     setLoading(false);
   };
 

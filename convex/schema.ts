@@ -7,6 +7,7 @@ export default defineSchema({
     email: v.string(),
     image: v.string(),
     uid: v.string(),
+    token: v.optional(v.number()),
   }),
   workspace: defineTable({
     fileData: v.optional(v.any()),
