@@ -7,21 +7,24 @@ import { ListCollapse, MessagesSquare } from "lucide-react";
 import WorkspaceHistory from "./workspace-history";
 import { useState } from "react";
 import SidebarFooter from "./sidebar-footer";
+import { useCurrentUser } from "@/hooks/user-current-user";
+import { usePathname, useRouter } from "next/navigation";
 
 export function AppSidebar() {
   const [isOpen, setIsOpen] = useState(true);
+  const router = useRouter();
   return (
     <div
-      className={`fixed flex flex-col items-center justify-start top-0 left-0 z-30 pt-16 h-screen 
+      className={`fixed flex flex-col ${isOpen && "overflow-y-scroll"} items-center justify-start top-0 left-0 z-30 pt-16 h-screen 
         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-        w-[250px] text-white backdrop-blur-sm bg-[#212124] dark:bg-opacity-75
+        w-[250px] text-white backdrop-blur-md bg-[#212124] dark:bg-opacity-75
         transition-transform bg-opacity-35 duration-300`}
     >
       <button
         title="Toggle Sidebar"
         onClick={() => setIsOpen(!isOpen)}
         className={`absolute top-20 ${
-          isOpen ? " right-[-12px]" : " right-[-33px]"
+          isOpen ? " right-[12px]" : "right-[-33px]"
         } p-1 bg-indigo-500 backdrop-blur-md bg-opacity-45 hover:bg-opacity-65 text-black rounded-full hover:text-slate-300
         active:bg-slate-400 active:text-black shadow-md shadow-slate-900 transition-transform`}
       >
@@ -36,7 +39,10 @@ export function AppSidebar() {
       </div> */}
       <div className="flex flex-col flex-1">
         <div className="p-5 mt-10">
-          <Button className="bg-indigo-600 hover:bg-indigo-300 hover:text-slate-800 text-zinc-200 tracking-wide">
+          <Button
+            onClick={() => router.push("/")}
+            className="bg-indigo-600 hover:bg-indigo-300 hover:text-slate-800 text-zinc-200 tracking-wide"
+          >
             <MessagesSquare className="w-5 h-5" />
             Create New Project
           </Button>

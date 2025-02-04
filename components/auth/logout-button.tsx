@@ -12,7 +12,11 @@ const LogoutButton = ({ children }: LogoutButtonProps) => {
   const router = useRouter();
   const onBtnClick = async () => {
     await logout();
-    router.push("/auth/login");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userDetails");
+    }
+    router.refresh();
+    router.push("/");
   };
   return (
     <span className="cursor-pointer" onClick={onBtnClick}>

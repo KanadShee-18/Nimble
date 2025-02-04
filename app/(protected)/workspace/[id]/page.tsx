@@ -7,7 +7,7 @@ export default async function WorkSpace() {
   const user = await currentUser();
   return (
     <div className="p-10 pt-24 max-h-full overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:gap-10 gap-5">
         <div className="relative">
           <ChatSecion
             userName={user?.name}

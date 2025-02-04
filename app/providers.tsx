@@ -22,7 +22,7 @@ const Providers = ({ children }: ProviderProps) => {
               enableSystem
               disableTransitionOnChange
             >
-              <AppSidebar />
+              {/* <AppSidebar /> */}
               <NavBar />
               {children}
             </ThemeProvider>

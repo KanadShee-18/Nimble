@@ -6,6 +6,9 @@ import { LogIn, LogOut, Sparkles } from "lucide-react";
 import { currentUser } from "@/lib/auth";
 import LogoutButton from "../auth/logout-button";
 import UserButton from "./manage-user";
+import SignInButton from "./signin-button";
+import HomeButton from "../auth/home-button";
+import RegisterButton from "../auth/register-button";
 
 const NavBar = async () => {
   const user = await currentUser();
@@ -13,17 +16,11 @@ const NavBar = async () => {
     <div className="p-4 w-full fixed top-0 flex justify-between items-center text-sm z-[100] backdrop-blur-md">
       <Image src={LOGO} alt="Nimble" quality={100} width={40} height={40} />
       <div className="flex items-center gap-x-5">
-        {!user && (
-          <Button
-            className="tracking-wider group text-indigo-400"
-            variant={"ghost"}
-          >
-            Sign In
-            <LogIn className="group-hover:scale-125 duration-300 transition-all" />
-          </Button>
-        )}
+        {!user && <SignInButton />}
         {user ? (
           <>
+            <HomeButton />
+
             <UserButton
               userName={user.name}
               userEmail={user.email}
@@ -31,10 +28,7 @@ const NavBar = async () => {
             />
           </>
         ) : (
-          <Button className="text-white group tracking-wider bg-indigo-500 hover:bg-blue-600">
-            Get Started
-            <Sparkles className="group-hover:scale-125 duration-300 transition-all" />
-          </Button>
+          <RegisterButton />
         )}
       </div>
     </div>
