@@ -1,6 +1,7 @@
 "use client";
 
 import { MessageContext } from "@/context/MessageContext";
+import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { api } from "@/convex/_generated/api";
 import { PROVIDED_DEPENDENCIES } from "@/utils/constant";
 import Prompt from "@/utils/Prompt";
@@ -17,15 +18,20 @@ import { useParams } from "next/navigation";
 
 import React, { useContext, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { CountTokenUsed } from "./chat-section";
 
 const CodeSection = () => {
   const { id } = useParams();
   const convex = useConvex();
   const [activeTab, setActivetab] = useState("code");
+  const UpdateUserToken = useMutation(api.users.UpdateTokenUsed);
   const [files, setFiles] = useState(PROVIDED_DEPENDENCIES.DEFAULT_FILE);
 
   const { messages, setMessages } = useContext(MessageContext);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // @ts-ignore
+  const { userDetails, setUserDetails } = useContext(UserDetailsContext);
 
   const UpdateCode = useMutation(api.workspace.UpdateCodeFiles);
 
@@ -51,6 +57,16 @@ const CodeSection = () => {
       // @ts-ignore
       fileData: aiRes.files,
     });
+    if (userDetails?.token) {
+      const token =
+        userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiRes)));
+      // Update the token count in convex db:
+      await UpdateUserToken({
+        // @ts-ignore
+        userId: userDetails._id,
+        token: token,
+      });
+    }
     setLoading(false);
   };
 

@@ -52,7 +52,8 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   const { messages, setMessages } = useContext(MessageContext);
   const UpdateMessages = useMutation(api.workspace.UpdateMessages);
 
-  const { userDetails, setUserDetails } = useUserDetails();
+  // @ts-ignore
+  const { userDetails, setUserDetails } = useContext(UserDetailsContext);
 
   const [loading, setLoading] = useState<boolean>(false);
 
