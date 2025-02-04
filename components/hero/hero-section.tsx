@@ -1,6 +1,10 @@
 "use client";
 
-import { useUserDetails } from "@/context/UserDetailsContext";
+import {
+  UserDetailsContext,
+  UserType,
+  useUserDetails,
+} from "@/context/UserDetailsContext";
 import { MessageContext } from "@/context/MessageContext";
 import { useContext, useState, useEffect } from "react";
 import { ArrowRight, Link } from "lucide-react";
@@ -16,7 +20,7 @@ const Hero = ({ user }: { user: any }) => {
   const [userInput, setUserInput] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const { messages, setMessages } = useContext(MessageContext);
-  const { userDetails, setUserDetails } = useUserDetails();
+  const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
 
   const CreateUser = useMutation(api.users.CreateUser);
   const CreateWorkspace = useMutation(api.workspace.createWorkspace);
@@ -119,14 +123,6 @@ const Hero = ({ user }: { user: any }) => {
         openDialog={openDialog}
         closeDialog={() => setOpenDialog(false)}
       />
-
-      {/* Show user details */}
-      {userDetails && (
-        <div className="text-green-500">
-          Logged in as: {userDetails.name} ({userDetails.email}) (
-          {userDetails.image}) ({userDetails.uid})
-        </div>
-      )}
     </div>
   );
 };
