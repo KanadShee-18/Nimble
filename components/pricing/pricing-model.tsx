@@ -31,10 +31,10 @@ interface PricingProps {
 const PricingModel = () => {
   const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
   console.log("User details in pricing paypal page: ", userDetails);
-  const [selectedPayment, setSelectedPayment] = useState();
+  const [selectedPayment, setSelectedPayment] = useState<PricingProps>();
   const UpdateTokenForUser = useMutation(api.users.UpdateTokenUsed);
-  const handlePaymentSuccess = async (pricing: PricingProps) => {
-    const token = userDetails?.token + Number(pricing.price);
+  const handlePaymentSuccess = async () => {
+    const token = userDetails?.token + Number(selectedPayment?.value);
     console.log("Added token: ", token);
 
     await UpdateTokenForUser({
@@ -74,9 +74,12 @@ const PricingModel = () => {
             Upgrade to Pro
           </Button> */}
           <PayPalButtons
-            disabled={!userDetails}
+            onClick={() => {
+              setSelectedPayment(pricing);
+              console.log("Pricing token value: ", pricing.value);
+            }}
             onCancel={() => console.log("Payment cancelled!")}
-            onApprove={() => handlePaymentSuccess(pricing)}
+            onApprove={() => handlePaymentSuccess()}
             style={{
               layout: "horizontal",
               color: "gold",

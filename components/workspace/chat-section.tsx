@@ -76,6 +76,7 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   };
 
   const onGenerate = async (input: string) => {
+    
     //@ts-ignore
     setMessages((prev) => [
       ...prev,
