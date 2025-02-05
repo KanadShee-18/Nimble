@@ -3,15 +3,14 @@
 import PricingModel from "@/components/pricing/pricing-model";
 import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { api } from "@/convex/_generated/api";
-import constant, { PROVIDED_DEPENDENCIES } from "@/utils/constant";
-import { useConvex, useQuery } from "convex/react";
+import { PROVIDED_DEPENDENCIES } from "@/utils/constant";
+import { useQuery } from "convex/react";
 import { CircleEllipsis, Droplets, Gem } from "lucide-react";
 import React, { useContext } from "react";
 import PayPalProvider from "@/components/PaypalProvider";
 
 const PricingPage = () => {
-  const convex = useConvex();
-  const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
+  const { userDetails } = useContext(UserDetailsContext);
   const getUserByEmail = useQuery(
     api.users.getUser,
     userDetails ? { email: userDetails.email } : "skip"

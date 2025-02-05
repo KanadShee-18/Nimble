@@ -56,7 +56,7 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
     await sendVerificationEmail({
       email: verificationToken.email,
       token: verificationToken.token,
-      title: "Email Confirmation - NextAuth",
+      title: "Email Confirmation - NIMBLE",
       body: "Confirm your email by clicking this button below!",
       type: "VERIFY",
     });

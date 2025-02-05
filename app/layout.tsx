@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning={true}>
       <body
-        className={`${inter.className} antialiased bg-black`}
+        className={`${inter.className} antialiased bg-[#0f0f0f]`}
         suppressHydrationWarning={true}
       >
         <Providers>

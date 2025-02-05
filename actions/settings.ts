@@ -45,11 +45,6 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
           values.email !== user.email
         ) {
           const existingUser = await getUserByEmail(values.email);
-          // if (existingUser?.email === values.email) {
-          //   return {
-          //     error: "You're already using this email.",
-          //   };
-          // }
           if (existingUser && existingUser.id !== user.id) {
             return {
               error: "Email is already in use!",
@@ -62,7 +57,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
           await sendVerificationEmail({
             email: verificationEmailToken.email,
             token: verificationEmailToken.token,
-            title: "Email Confirmation - NextAuth",
+            title: "Email Confirmation - Nimble",
             body: "Confirm your email by clicking this button below!",
             type: "VERIFY",
           });

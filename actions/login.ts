@@ -45,7 +45,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
     await sendVerificationEmail({
       email: userExistance.email,
       token: verificationToken.token,
-      title: "Email Confirmation - NextAuth",
+      title: "Email Confirmation - NIMBLE",
       body: "Confirm your email by clicking the link below",
       type: "VERIFY",
     });
@@ -114,7 +114,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
       await sendVerificationEmail({
         email: twoFactorToken.email,
         token: twoFactorToken.token,
-        title: "Two Factor Authentication - NextAuth",
+        title: "Two Factor Authentication - NIMBLE",
         body: "Copy the 6-digit code below and paste it",
         type: "TWO_FA",
       });

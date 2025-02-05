@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { useConvex, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { api } from "@/convex/_generated/api";
 import { AlignLeft, FolderKanban } from "lucide-react";
@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 
 const WorkspaceHistory = () => {
   const { id } = useParams();
-  const { userDetails } = useContext<any>(UserDetailsContext);
+  const { userDetails } = useContext(UserDetailsContext);
 
   const workSpaces = useQuery(api.workspace.GetAllWorkspaces, {
     userId: userDetails?._id,
@@ -32,7 +32,7 @@ const WorkspaceHistory = () => {
                 href={`/workspace/${workSpace?._id}`}
                 key={index}
                 className={`${
-                  id === workSpace._id && "bg-blue-400"
+                  id === workSpace._id && "bg-yellow-100"
                 } w-full my-2 text-left bg-indigo-900 px-3 py-2 text-sm rounded-lg bg-opacity-15 text-zinc-300 tracking-wide flex items-center gap-4 hover:bg-opacity-70 hover:bg-indigo-600 cursor-pointer group duration-300 transition-all shadow-md shadow-slate-950 hover:scale-95`}
               >
                 <AlignLeft className="w-4 h-4" />
@@ -43,7 +43,7 @@ const WorkspaceHistory = () => {
             ))}
           </div>
         ) : (
-          <div>No Projects Found</div>
+          <div className="text-sm text-zinc-300">No Projects Found</div>
         )}
       </div>
     </div>

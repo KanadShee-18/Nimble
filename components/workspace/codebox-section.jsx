@@ -9,7 +9,6 @@ import {
   SandpackProvider,
   SandpackLayout,
   SandpackCodeEditor,
-  SandpackPreview,
   SandpackFileExplorer,
 } from "@codesandbox/sandpack-react";
 import axios from "axios";
@@ -29,15 +28,20 @@ const CodeSection = () => {
   const UpdateUserToken = useMutation(api.users.UpdateTokenUsed);
   const [files, setFiles] = useState(PROVIDED_DEPENDENCIES.DEFAULT_FILE);
 
-  const { messages, setMessages } = useContext(MessageContext);
-  const [loading, setLoading] = useState<boolean>(false);
-  const { action, setAction } = useContext<any>(SandboxActionContext);
+  const { messages } = useContext(MessageContext);
+  const [loading, setLoading] = useState(false);
+  const { action } = useContext(SandboxActionContext);
 
   useEffect(() => {
-    setActivetab("preview");
+    if (action) {
+      setActivetab("preview");
+    }
   }, [action]);
 
-  // @ts-ignore
+  useEffect(() => {
+    setActivetab("code");
+  }, [id]);
+
   const { userDetails, setUserDetails } = useContext(UserDetailsContext);
 
   const UpdateCode = useMutation(api.workspace.UpdateCodeFiles);
@@ -54,26 +58,21 @@ const CodeSection = () => {
 
     const mergedFiles = {
       ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
-      // @ts-ignore
+
       ...aiRes?.files,
     };
     setFiles(mergedFiles);
     await UpdateCode({
-      // @ts-ignore
       workspaceId: id,
-      // @ts-ignore
       fileData: aiRes.files,
     });
     if (userDetails?.token) {
       const token =
         userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiRes)));
-      // Update the token count in convex db:
       await UpdateUserToken({
-        // @ts-ignore
         userId: userDetails._id,
         token: token,
       });
-      // @ts-ignore
       setUserDetails((prev) => ({
         ...prev,
         token: token,
@@ -85,7 +84,6 @@ const CodeSection = () => {
   const existingCodeFiles = async () => {
     setLoading(true);
     const result = await convex.query(api.workspace.GetWorkSpace, {
-      // @ts-ignore
       workspaceId: id,
     });
     const mergedFiles = {

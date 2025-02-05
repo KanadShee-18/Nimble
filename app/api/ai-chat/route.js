@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { chatSession } from "@/configs/AiModel";
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   const { prompt } = await req.json();
 
   if (!prompt) {
@@ -28,7 +28,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        // @ts-ignore
         error: e.message,
         message: "Some error occurred while getting the ai response.",
       },

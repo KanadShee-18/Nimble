@@ -18,45 +18,27 @@ import ReactMarkDown from "react-markdown";
 import { BeatLoader } from "react-spinners";
 import { toast } from "sonner";
 
-interface Message {
-  role: "user"; // Add more roles if needed
-  content: string;
-}
-
-interface AiResponse {
-  aiResponse: string;
-}
-
-export interface UserProps {
-  userName: string | null | undefined;
-  userImage: string | null | undefined;
-  userEmail: string | null | undefined;
-}
-
-type Messages = Message[];
-
-export const CountTokenUsed = (inputText: string) => {
+export const CountTokenUsed = (inputText) => {
   return inputText
     .trim()
     .split(/\s+/)
     .filter((word) => word).length;
 };
 
-const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
+const ChatSecion = ({ userName, userImage, userEmail }) => {
   const { id } = useParams();
   console.log(id);
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const endRef = useRef(null);
   const convex = useConvex();
-  const [userInput, setUserInput] = useState<string>("");
+  const [userInput, setUserInput] = useState("");
   const UpdateUserToken = useMutation(api.users.UpdateTokenUsed);
 
   const { messages, setMessages } = useContext(MessageContext);
   const UpdateMessages = useMutation(api.workspace.UpdateMessages);
 
-  // @ts-ignore
   const { userDetails, setUserDetails } = useContext(UserDetailsContext);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -68,20 +50,17 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
 
   const GetWorkSpaceData = async () => {
     const result = await convex.query(api.workspace.GetWorkSpace, {
-      // @ts-ignore
       workspaceId: id,
     });
-    // setMessages(result?.messages);
     setMessages(Array.isArray(result?.messages) ? result.messages : []);
     console.log("Workspace result: ", result);
   };
 
-  const onGenerate = async (input: string) => {
+  const onGenerate = async (input) => {
     if (userDetails.token < 10) {
       toast.error("You don't have enough token to generate response!");
       return;
     }
-    //@ts-ignore
     setMessages((prev) => [
       ...prev,
       {
@@ -104,7 +83,7 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   const GetAiResult = async () => {
     setLoading(true);
     const PROMPT = JSON.stringify(messages) + Prompt.CHAT_PROMPT;
-    const result = await axios.post<AiResponse>("/api/ai-chat", {
+    const result = await axios.post("/api/ai-chat", {
       prompt: PROMPT,
     });
     const aiResponse = {
@@ -112,26 +91,20 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
       content: result.data?.aiResponse,
     };
 
-    // @ts-ignore
     setMessages((prev) => [...prev, aiResponse]);
 
     await UpdateMessages({
       messages: [...messages, aiResponse],
-      //@ts-ignore
       workspaceId: id,
     });
 
     if (userDetails?.token) {
       const token =
         userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiResponse)));
-      // Update the token count in convex db:
       await UpdateUserToken({
-        // @ts-ignore
         userId: userDetails._id,
         token: token,
       });
-      // also update the userdetails in context
-      // @ts-ignore
       setUserDetails((prev) => ({
         ...prev,
         token: token,
@@ -148,11 +121,10 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
     <div className="h-[85vh] relative flex flex-col ">
       <div className="flex-1 overflow-y-scroll ">
         {messages && Array.isArray(messages) ? (
-          // @ts-ignore
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`${msg.role === "user" ? "bg-zinc-800 rounded-bl-none" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl  shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7 rounded-br-none"} leading-5`}
+              className={`${msg.role === "user" ? "bg-zinc-800 rounded-bl-none hover:translate-x-2 duration-200 transition-all" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl  shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7 rounded-br-none hover:-translate-x-2 duration-150 transition-all"} leading-5`}
             >
               <div
                 className={`absolute w-5 h-5 rounded-br-full   -bottom-[1px] ${msg.role === "user" ? "left-0" : "right-0"}

@@ -27,6 +27,7 @@ import FormError from "@/components/auth/form-error";
 import { Switch } from "@/components/ui/switch";
 import { BeatLoader } from "react-spinners";
 import { toast } from "sonner";
+import { Separator } from "@/components/ui/separator";
 
 const SettingsPage = () => {
   const { update } = useSession();
@@ -90,149 +91,152 @@ const SettingsPage = () => {
   }
 
   return (
-    <Card className=" max-w-md min-w-[300px] md:min-w-[400px]">
-      <CardHeader>
-        <p className="text-blue-600 font-semibold text-3xl text-center">
-          Settings
-        </p>
-      </CardHeader>
-      <hr />
-      <CardContent className="mt-3">
-        <Form {...form}>
-          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-blue-500">Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        value={field.value}
-                        placeholder={"John Doe"}
-                        disabled={loading}
-                        className="shadow-sm shadow-blue-600"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-rose-400" />
-                  </FormItem>
-                )}
-              />
-              {user?.isOauth === false && (
-                <>
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-blue-500">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            value={field.value}
-                            placeholder={"johndoe@gmail.com"}
-                            disabled={loading}
-                            className="shadow-sm shadow-blue-600"
-                          />
-                        </FormControl>
-                        <FormMessage className="text-rose-400" />
-                      </FormItem>
-                    )}
-                  />
+    <div className="w-full min-h-screen flex items-center justify-center bg-[#0d0c11]">
+      <div className="w-3/4 h-3/4 fixed -bottom-1/4 -left-1/4 bg-gradient-to-br from-emerald-600 via-indigo-500 to-slate-700 rounded-full opacity-35 blur-[200px]" />
+      <Card className="relative max-w-md p-2 min-w-[300px] md:min-w-[400px] mx-auto bg-slate-950">
+        <CardHeader className="bg-slate-900 rounded-md">
+          <p className="text-indigo-600 font-semibold text-3xl text-center">
+            Settings
+          </p>
+        </CardHeader>
+        <Separator className="my-3" />
+        <CardContent className="mt-3 bg-slate-900 rounded-md pt-4">
+          <Form {...form}>
+            <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-blue-500">Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          value={field.value}
+                          placeholder={"John Doe"}
+                          disabled={loading}
+                          className="shadow-sm shadow-indigo-600"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-rose-400" />
+                    </FormItem>
+                  )}
+                />
+                {user?.isOauth === false && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-blue-500">Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="email"
+                              value={field.value}
+                              placeholder={"johndoe@gmail.com"}
+                              disabled={loading}
+                              className="shadow-sm shadow-indigo-600"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-rose-400" />
+                        </FormItem>
+                      )}
+                    />
 
-                  <hr />
-                  <p className="text-sm text-indigo-300 tracking-wider">
-                    Want to change password?
-                  </p>
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-blue-500">
-                          Current Password
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="password"
-                            value={field.value}
-                            placeholder={"jaeur#@!"}
-                            disabled={loading}
-                            className="shadow-sm shadow-blue-600"
-                          />
-                        </FormControl>
-                        <FormMessage className="text-rose-400" />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="newPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-blue-500">
-                          New Password
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="password"
-                            value={field.value}
-                            placeholder={"eroihv345$^."}
-                            disabled={loading}
-                            className="shadow-sm shadow-blue-600"
-                          />
-                        </FormControl>
-                        <FormMessage className="text-rose-400" />
-                      </FormItem>
-                    )}
-                  />
-                  <div className="w-full h-[1px] bg-slate-700" />
-                  <FormField
-                    control={form.control}
-                    name="isTwoFactorEnabled"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row gap-x-4 items-center justify-between rounded-lg border p-3 shadow-sm shadow-blue-600">
-                        <div className="-space-y-0.5">
+                    <hr />
+                    <p className="text-sm text-indigo-300 tracking-wider">
+                      Want to change password?
+                    </p>
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
                           <FormLabel className="text-blue-500">
-                            Two Factor Authentication
+                            Current Password
                           </FormLabel>
-                          <FormDescription className="text-xs">
-                            Enable two factor authentication for your account
-                          </FormDescription>
-                        </div>
-                        <FormControl>
-                          <Switch
-                            disabled={loading}
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage className="text-rose-400" />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
-            </div>
-            {success && <FormSuccess successMessage={success} />}
-            {error && <FormError errorMessage={error} />}
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-700 text-white tracking-wider hover:bg-slate-900 hover:shadow-sm hover:shadow-blue-600"
-            >
-              {loading ? "SAVING" : "SAVE"}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="password"
+                              value={field.value}
+                              placeholder={"jaeur#@!"}
+                              disabled={loading}
+                              className="shadow-sm shadow-indigo-600"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-rose-400" />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="newPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-blue-500">
+                            New Password
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="password"
+                              value={field.value}
+                              placeholder={"eroihv345$^."}
+                              disabled={loading}
+                              className="shadow-sm shadow-indigo-600"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-rose-400" />
+                        </FormItem>
+                      )}
+                    />
+                    <div className="w-full h-[1px] bg-slate-700" />
+                    <FormField
+                      control={form.control}
+                      name="isTwoFactorEnabled"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row gap-x-4 items-center justify-between rounded-lg border p-3 shadow-sm shadow-indigo-600">
+                          <div className="-space-y-0.5">
+                            <FormLabel className="text-blue-500">
+                              Two Factor Authentication
+                            </FormLabel>
+                            <FormDescription className="text-xs">
+                              Enable two factor authentication for your account
+                            </FormDescription>
+                          </div>
+                          <FormControl>
+                            <Switch
+                              disabled={loading}
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-rose-400" />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )}
+              </div>
+              {success && <FormSuccess successMessage={success} />}
+              {error && <FormError errorMessage={error} />}
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-indigo-600 text-white tracking-wider hover:bg-indigo-900 hover:shadow-sm hover:shadow-indigo-600"
+              >
+                {loading ? "SAVING" : "SAVE"}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

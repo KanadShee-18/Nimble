@@ -3,35 +3,16 @@
 import { PROVIDED_DEPENDENCIES } from "@/utils/constant";
 import React, { useContext, useState } from "react";
 import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
 import { Blend } from "lucide-react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-interface PricingProps {
-  name: string;
-  tokens: string;
-  value: number;
-  desc: string;
-  price: number;
-}
-
-// interface userDetailsProps {
-//   email: string;
-//   image: string;
-//   name: string;
-//   token: number;
-//   uid: string;
-//   _creationTime: number;
-//   _id: string;
-// }
-
 const PricingModel = () => {
-  const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
+  const { userDetails } = useContext(UserDetailsContext);
   console.log("User details in pricing paypal page: ", userDetails);
-  const [selectedPayment, setSelectedPayment] = useState<PricingProps>();
+  const [selectedPayment, setSelectedPayment] = useState();
   const UpdateTokenForUser = useMutation(api.users.UpdateTokenUsed);
   const handlePaymentSuccess = async () => {
     const token = userDetails?.token + Number(selectedPayment?.value);
@@ -91,7 +72,6 @@ const PricingModel = () => {
                 purchase_units: [
                   {
                     amount: {
-                      // @ts-ignore
                       value: pricing.price,
                       currency_code: "USD",
                     },

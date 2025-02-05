@@ -31,7 +31,7 @@ export const reset = async (data: z.infer<typeof ResetSchema>) => {
   await sendVerificationEmail({
     email: passwordResetToken.email,
     token: passwordResetToken.token,
-    title: "Reset Password - NextAuth",
+    title: "Reset Password - NIMBLE",
     body: "Reset your password by clicking the button below",
     type: "RESET",
   });

@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  UserDetailsContext,
-  UserType,
-  useUserDetails,
-} from "@/context/UserDetailsContext";
+import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { MessageContext } from "@/context/MessageContext";
 import { useContext, useState, useEffect } from "react";
 import { ArrowRight, Link } from "lucide-react";
@@ -16,12 +12,12 @@ import uuid4 from "uuid4";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const Hero = ({ user }: { user: any }) => {
+const Hero = ({ user }) => {
   const router = useRouter();
   const [userInput, setUserInput] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
-  const { messages, setMessages } = useContext(MessageContext);
-  const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
+  const { setMessages } = useContext(MessageContext);
+  const { userDetails, setUserDetails } = useContext(UserDetailsContext);
 
   const CreateUser = useMutation(api.users.CreateUser);
   const CreateWorkspace = useMutation(api.workspace.createWorkspace);
@@ -51,7 +47,7 @@ const Hero = ({ user }: { user: any }) => {
     authenticateUser();
   }, [user, getUserByEmail, CreateUser, setUserDetails]);
 
-  const onGenerate = async (input: string) => {
+  const onGenerate = async (input) => {
     if (!user) {
       setOpenDialog(true);
       return;
@@ -67,7 +63,6 @@ const Hero = ({ user }: { user: any }) => {
     setMessages(msgView);
     if (userDetails) {
       const workspaceId = await CreateWorkspace({
-        //@ts-ignore
         user: userDetails?._id,
         message: [msgView],
       });
@@ -85,11 +80,11 @@ const Hero = ({ user }: { user: any }) => {
   console.log("User details in context: ", userDetails);
 
   return (
-    <div className="flex flex-col items-center mt-36 xl:mt-52 gap-2">
-      <h2 className="font-bold text-4xl text-zinc-300">
+    <div className="flex relative flex-col  w-full h-screen items-center pt-36 xl:pt-52 gap-4">
+      <h2 className="font-bold text-4xl text-zinc-300 backdrop-blur-md">
         What do you want to build?
       </h2>
-      <p className="text-zinc-400 font-medium">
+      <p className="text-zinc-400 font-medium backdrop-blur-md">
         Prompt, run, edit, and deploy full-stack web apps.
       </p>
       <div className="p-[1px] bg-gradient-to-br from-indigo-700 via-slate-600 to-gray-900 rounded-xl">

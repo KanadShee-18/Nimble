@@ -1,7 +1,7 @@
 import { GenAiCode } from "@/configs/AiModel";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
     const { prompt } = await req.json();
 
@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        // @ts-ignore
         error: error.message,
         message: "Some problem occurred while generating the code!",
       },

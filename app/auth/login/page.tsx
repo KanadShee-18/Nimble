@@ -1,5 +1,4 @@
 import LoginForm from "@/components/auth/login-form";
-import ThemeToggler from "@/components/common/theme-toggler";
 import React from "react";
 
 const LoginPage = () => {

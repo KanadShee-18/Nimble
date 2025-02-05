@@ -41,7 +41,7 @@ const UserButton = ({ userEmail, userName, userImage }: UserButtonProps) => {
             )}
           </div>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-4 mr-8 overflow-hidden">
+        <PopoverContent className="w-auto p-4 mr-8 mt-5 overflow-hidden">
           <div className="space-y-3">
             <div className="flex gap-2 justify-between items-center">
               <Button className="bg-indigo-700 w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-indigo-300 hover:text-slate-800 text-lg">

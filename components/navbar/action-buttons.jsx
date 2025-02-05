@@ -4,26 +4,33 @@ import React, { useContext } from "react";
 import { Button } from "../ui/button";
 import { Rocket, Download } from "lucide-react";
 import { SandboxActionContext } from "@/context/ActionContext";
+import { usePathname } from "next/navigation";
 
 const ActionButton = () => {
   const context = useContext(SandboxActionContext);
+  const pathname = usePathname();
 
   if (!context) {
-    console.error("ActionButton must be used within a SandboxActionProvider");
     return null;
   }
 
-  const { action, setAction } = context;
+  const { setAction } = context;
 
-  const handleClick = (actionType: string) => {
+  const handleClick = (actionType) => {
     setAction({
-        actionType: actionType,
-        timeStamp: Date.now(),
+      actionType: actionType,
+      timeStamp: Date.now(),
     });
   };
 
   return (
-    <div className="flex flex-row gap-x-4">
+    <div
+      className={`flex flex-row gap-x-4 ${
+        pathname === "/" || pathname === "/pricing" || pathname === "/settings"
+          ? "hidden"
+          : "block"
+      }`}
+    >
       <Button
         onClick={() => handleClick("export")}
         className="bg-zinc-800 text-indigo-400 hover:bg-neutral-900 hover:text-indigo-200 group shadow-sm shadow-indigo-800"

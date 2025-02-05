@@ -1,17 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import LOGO from "@/public/Images/hero-transparent.png";
 import { Button } from "../ui/button";
 import { ListCollapse, MessagesSquare } from "lucide-react";
 import WorkspaceHistory from "./workspace-history";
 import { useState } from "react";
 import SidebarFooter from "./sidebar-footer";
-import { useCurrentUser } from "@/hooks/user-current-user";
-import { usePathname, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 export function AppSidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   return (
     <div
