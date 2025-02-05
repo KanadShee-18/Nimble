@@ -9,6 +9,9 @@ import UserButton from "./manage-user";
 import SignInButton from "./signin-button";
 import HomeButton from "../auth/home-button";
 import RegisterButton from "../auth/register-button";
+import ExportButton from "../navbar/export-button";
+import DeployButton from "../navbar/deploy-button";
+import ActionButton from "../navbar/action-buttons";
 
 const NavBar = async () => {
   const user = await currentUser();
@@ -20,6 +23,9 @@ const NavBar = async () => {
         {user ? (
           <>
             <HomeButton />
+            <ActionButton />
+            {/* <ExportButton /> */}
+            {/* <DeployButton /> */}
 
             <UserButton
               userName={user.name}

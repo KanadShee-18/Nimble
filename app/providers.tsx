@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import NavBar from "@/components/common/navbar-section";
 import { MessageProvider } from "@/context/MessageContext";
 import { UserDetailsProvider } from "@/context/UserDetailsContext";
+import { SandboxActionProvider } from "@/context/ActionContext";
 import ConvexClientProvider from "./ConvexClientProvider";
 
 interface ProviderProps {
@@ -15,16 +16,18 @@ const Providers = ({ children }: ProviderProps) => {
       <ConvexClientProvider>
         <UserDetailsProvider>
           <MessageProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {/* <AppSidebar /> */}
-              <NavBar />
-              {children}
-            </ThemeProvider>
+            <SandboxActionProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                {/* <AppSidebar /> */}
+                <NavBar />
+                {children}
+              </ThemeProvider>
+            </SandboxActionProvider>
           </MessageProvider>
         </UserDetailsProvider>
       </ConvexClientProvider>

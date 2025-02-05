@@ -19,6 +19,8 @@ import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { CountTokenUsed } from "./chat-section";
+import SandpackPreviewClient from "../code-view/SandpackPreviewClient";
+import { SandboxActionContext } from "@/context/ActionContext";
 
 const CodeSection = () => {
   const { id } = useParams();
@@ -29,6 +31,11 @@ const CodeSection = () => {
 
   const { messages, setMessages } = useContext(MessageContext);
   const [loading, setLoading] = useState<boolean>(false);
+  const { action, setAction } = useContext<any>(SandboxActionContext);
+
+  useEffect(() => {
+    setActivetab("preview");
+  }, [action]);
 
   // @ts-ignore
   const { userDetails, setUserDetails } = useContext(UserDetailsContext);
@@ -127,10 +134,16 @@ const CodeSection = () => {
         customSetup={{
           dependencies: {
             ...PROVIDED_DEPENDENCIES.DEPENDANCY,
+            tailwindcss: "^3.3.0", // Install Tailwind
+            postcss: "^8.4.0",
+            autoprefixer: "^10.4.0",
+          },
+          devDependencies: {
+            "postcss-cli": "^10.1.0",
           },
         }}
         options={{
-          externalResources: ["https://cdn.tailwindcss.com"],
+          externalResources: ["https://unpkg.com/@tailwindcss/browser@4"],
         }}
       >
         <SandpackLayout>
@@ -145,9 +158,7 @@ const CodeSection = () => {
               />
             </>
           )}
-          {activeTab === "preview" && (
-            <SandpackPreview style={{ height: "80vh" }} showNavigator={true} />
-          )}
+          {activeTab === "preview" && <SandpackPreviewClient />}
         </SandpackLayout>
       </SandpackProvider>
       {loading && (
