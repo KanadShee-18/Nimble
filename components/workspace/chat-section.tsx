@@ -16,6 +16,7 @@ import axios from "axios";
 import Prompt from "@/utils/Prompt";
 import ReactMarkDown from "react-markdown";
 import { BeatLoader } from "react-spinners";
+import { toast } from "sonner";
 
 interface Message {
   role: "user"; // Add more roles if needed
@@ -76,7 +77,10 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
   };
 
   const onGenerate = async (input: string) => {
-    
+    if (userDetails.token < 10) {
+      toast.error("You don't have enough token to generate response!");
+      return;
+    }
     //@ts-ignore
     setMessages((prev) => [
       ...prev,
@@ -126,12 +130,19 @@ const ChatSecion = ({ userName, userImage, userEmail }: UserProps) => {
         userId: userDetails._id,
         token: token,
       });
+      // also update the userdetails in context
+      // @ts-ignore
+      setUserDetails((prev) => ({
+        ...prev,
+        token: token,
+      }));
     }
 
     setLoading(false);
   };
 
   console.log("In messages now messages are: ", messages);
+  console.log("In chat section use details are: ", userDetails);
 
   return (
     <div className="h-[85vh] relative flex flex-col ">

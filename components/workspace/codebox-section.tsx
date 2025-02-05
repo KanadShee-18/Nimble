@@ -66,6 +66,11 @@ const CodeSection = () => {
         userId: userDetails._id,
         token: token,
       });
+      // @ts-ignore
+      setUserDetails((prev) => ({
+        ...prev,
+        token: token,
+      }));
     }
     setLoading(false);
   };

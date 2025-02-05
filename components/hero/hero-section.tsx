@@ -14,6 +14,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import uuid4 from "uuid4";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Hero = ({ user }: { user: any }) => {
   const router = useRouter();
@@ -53,6 +54,10 @@ const Hero = ({ user }: { user: any }) => {
   const onGenerate = async (input: string) => {
     if (!user) {
       setOpenDialog(true);
+      return;
+    }
+    if (userDetails && userDetails.token < 10) {
+      toast.error("You don't have enough token to generate response!");
       return;
     }
     const msgView = {
