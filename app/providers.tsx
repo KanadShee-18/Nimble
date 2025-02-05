@@ -4,7 +4,6 @@ import NavBar from "@/components/common/navbar-section";
 import { MessageProvider } from "@/context/MessageContext";
 import { UserDetailsProvider } from "@/context/UserDetailsContext";
 import ConvexClientProvider from "./ConvexClientProvider";
-import { AppSidebar } from "@/components/sidebar/sidebar-section";
 
 interface ProviderProps {
   children: React.ReactNode;

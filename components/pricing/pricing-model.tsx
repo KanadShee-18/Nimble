@@ -1,12 +1,48 @@
 "use client";
 
 import { PROVIDED_DEPENDENCIES } from "@/utils/constant";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { Blend } from "lucide-react";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import { UserDetailsContext } from "@/context/UserDetailsContext";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+
+interface PricingProps {
+  name: string;
+  tokens: string;
+  value: number;
+  desc: string;
+  price: number;
+}
+
+// interface userDetailsProps {
+//   email: string;
+//   image: string;
+//   name: string;
+//   token: number;
+//   uid: string;
+//   _creationTime: number;
+//   _id: string;
+// }
 
 const PricingModel = () => {
+  const { userDetails, setUserDetails } = useContext<any>(UserDetailsContext);
+  console.log("User details in pricing paypal page: ", userDetails);
+  const [selectedPayment, setSelectedPayment] = useState();
+  const UpdateTokenForUser = useMutation(api.users.UpdateTokenUsed);
+  const handlePaymentSuccess = async (pricing: PricingProps) => {
+    const token = userDetails?.token + Number(pricing.price);
+    console.log("Added token: ", token);
+
+    await UpdateTokenForUser({
+      token: token,
+      userId: userDetails._id,
+    });
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10">
       {PROVIDED_DEPENDENCIES.PRICING_OPTIONS.map((pricing) => (
@@ -34,9 +70,33 @@ const PricingModel = () => {
             Billed monthly
           </p>
           <Separator className="my-4" />
-          <Button className="my-5 w-full bg-indigo-600 text-slate-200 tracking-wide hover:text-slate-900 hover:bg-indigo-400 shadow-md shadow-slate-950">
+          {/* <Button className="my-5 w-full bg-indigo-600 text-slate-200 tracking-wide hover:text-slate-900 hover:bg-indigo-400 shadow-md shadow-slate-950">
             Upgrade to Pro
-          </Button>
+          </Button> */}
+          <PayPalButtons
+            disabled={!userDetails}
+            onCancel={() => console.log("Payment cancelled!")}
+            onApprove={() => handlePaymentSuccess(pricing)}
+            style={{
+              layout: "horizontal",
+              color: "gold",
+              shape: "sharp",
+              height: 45,
+            }}
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      // @ts-ignore
+                      value: pricing.price,
+                      currency_code: "USD",
+                    },
+                  },
+                ],
+              });
+            }}
+          />
         </div>
       ))}
     </div>
