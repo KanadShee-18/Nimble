@@ -58,10 +58,6 @@ const CodeSection = () => {
 
       const aiRes = result?.data;
 
-      if (!aiRes?.success) {
-        toast.message("Failed to generate code. Try again!");
-      }
-
       const mergedFiles = {
         ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
 
