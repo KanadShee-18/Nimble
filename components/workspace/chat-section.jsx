@@ -18,6 +18,7 @@ import ReactMarkDown from "react-markdown";
 import { BeatLoader } from "react-spinners";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+import { SandboxActionContext } from "@/context/ActionContext";
 
 export const CountTokenUsed = (inputText) => {
   return inputText
@@ -34,6 +35,8 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
   const UpdateUserToken = useMutation(api.users.UpdateTokenUsed);
 
   const { messages, setMessages } = useContext(MessageContext);
+  const actionContext = useContext(SandboxActionContext);
+  const { setAction } = actionContext;
   const UpdateMessages = useMutation(api.workspace.UpdateMessages);
 
   const { userDetails, setUserDetails } = useContext(UserDetailsContext);
@@ -81,6 +84,7 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
 
   const GetAiResult = async () => {
     setLoading(true);
+    setAction(null);
     const PROMPT = JSON.stringify(messages) + Prompt.CHAT_PROMPT;
     const result = await axios.post("/api/ai-chat", {
       prompt: PROMPT,
@@ -112,7 +116,6 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
 
     setLoading(false);
   };
-
 
   return (
     <div className="h-[85vh] relative flex flex-col ">
