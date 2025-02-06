@@ -17,6 +17,7 @@ import Prompt from "@/utils/Prompt";
 import ReactMarkDown from "react-markdown";
 import { BeatLoader } from "react-spinners";
 import { toast } from "sonner";
+import { motion } from "motion/react";
 
 export const CountTokenUsed = (inputText) => {
   return inputText
@@ -27,7 +28,6 @@ export const CountTokenUsed = (inputText) => {
 
 const ChatSecion = ({ userName, userImage, userEmail }) => {
   const { id } = useParams();
-  console.log(id);
   const endRef = useRef(null);
   const convex = useConvex();
   const [userInput, setUserInput] = useState("");
@@ -53,7 +53,6 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
       workspaceId: id,
     });
     setMessages(Array.isArray(result?.messages) ? result.messages : []);
-    console.log("Workspace result: ", result);
   };
 
   const onGenerate = async (input) => {
@@ -114,15 +113,23 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
     setLoading(false);
   };
 
-  console.log("In messages now messages are: ", messages);
-  console.log("In chat section use details are: ", userDetails);
 
   return (
     <div className="h-[85vh] relative flex flex-col ">
       <div className="flex-1 overflow-y-scroll ">
         {messages && Array.isArray(messages) ? (
           messages?.map((msg, index) => (
-            <div
+            <motion.div
+              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              transition={{
+                type: "spring",
+                duration: 0.5,
+                stiffness: 80,
+                damping: 12,
+                // ease: [0, 0.71, 0.2, 1.01],
+              }}
+              viewport={{ once: true }}
               key={index}
               className={`${msg.role === "user" ? "bg-zinc-800 rounded-bl-none hover:translate-x-2 duration-200 transition-all" : "bg-[#18181b]"} flex gap-2 items-center text-start tracking-wide text-sm p-3 rounded-2xl  shadow-sm shadow-indigo-900 mb-5 relative w-[95%] ${msg.role === "ai" && "ml-auto pb-7 rounded-br-none hover:-translate-x-2 duration-150 transition-all"} leading-5`}
             >
@@ -154,7 +161,7 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
               >
                 {msg.content}
               </ReactMarkDown>
-            </div>
+            </motion.div>
           ))
         ) : (
           <div className="w-full flex items-center justify-center">
@@ -180,18 +187,25 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
                 placeholder="What do you want to build?"
-                className="bg-transparent text-sm flex-1 resize-none h-20 max-h-28 outline-none scrollbar-hide font-medium tracking-wide text-indigo-300"
+                className="bg-transparent text-sm flex-1 resize-none h-28 max-h-28 outline-none scrollbar-hide font-medium tracking-wide text-indigo-300"
               />
               {userInput?.length >= 3 && (
-                <ArrowRight
-                  onClick={() => onGenerate(userInput)}
-                  className="bg-indigo-500 p-2 h-9 w-9 rounded-md cursor-pointer hover:bg-blue-600 shadow-md shadow-slate-950 text-white"
-                />
+                <motion.span
+                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 1, ease: [0, 0.71, 0.2, 1.01] }}
+                  viewport={{ once: true }}
+                >
+                  <ArrowRight
+                    onClick={() => onGenerate(userInput)}
+                    className="bg-indigo-500 p-2 h-8 w-8 rounded-md cursor-pointer hover:bg-indigo-700 shadow-md shadow-slate-950 text-white"
+                  />
+                </motion.span>
               )}
             </div>
-            <div className=" hover:bg-indigo-700 text-indigo-500 hover:text-slate-50 cursor-pointer w-fit p-2 rounded-xl hover:shadow-md hover:shadow-slate-950 transition-all duration-200">
+            {/* <div className=" hover:bg-indigo-700 text-indigo-500 hover:text-slate-50 cursor-pointer w-fit p-2 rounded-xl hover:shadow-md hover:shadow-slate-950 transition-all duration-200">
               <Link className="w-5 h-5" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

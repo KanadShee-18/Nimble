@@ -20,7 +20,6 @@ export default function ThemeToggler() {
   };
 
   const toggleTheme = () => {
-    console.log("Theme changed ...");
 
     switchTheme();
   };

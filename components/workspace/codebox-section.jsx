@@ -20,6 +20,7 @@ import { BeatLoader } from "react-spinners";
 import { CountTokenUsed } from "./chat-section";
 import SandpackPreviewClient from "../code-view/SandpackPreviewClient";
 import { SandboxActionContext } from "@/context/ActionContext";
+import { Hint } from "../common/tool-tip";
 
 const CodeSection = () => {
   const { id } = useParams();
@@ -52,7 +53,6 @@ const CodeSection = () => {
     const result = await axios.post("/api/gen-ai-code", {
       prompt: PROMPT,
     });
-    console.log("Ai code gen response: ", result?.data);
 
     const aiRes = result?.data;
 
@@ -111,18 +111,22 @@ const CodeSection = () => {
     <div className="relative">
       <div className="bg-[#181818] mb-1 w-full p-2 border rounded-md">
         <div className="flex text-sm flex-wrap shrink-0 bg-[#070707] w-fit justify-start items-center rounded-2xl">
-          <h2
-            onClick={() => setActivetab("code")}
-            className={`cursor-pointer hover:bg-opacity-35 ${activeTab === "code" && "bg-indigo-500 bg-opacity-25  text-indigo-400 font-semibold shadow-sm shadow-slate-950"} rounded-2xl px-2 py-1 text-indigo-500 transition-all duration-300 hover:bg-slate-700`}
-          >
-            Code
-          </h2>
-          <h2
-            onClick={() => setActivetab("preview")}
-            className={`cursor-pointer hover:bg-opacity-30 ${activeTab === "preview" && "bg-indigo-500 bg-opacity-25  text-indigo-400 font-semibold shadow-sm shadow-slate-950"} text-indigo-500 rounded-2xl px-2 py-1 transition-all duration-300 hover:bg-slate-700`}
-          >
-            Preview
-          </h2>
+          <Hint label="See Code" side="top" allignOffset={20}>
+            <h2
+              onClick={() => setActivetab("code")}
+              className={`cursor-pointer hover:bg-opacity-35 ${activeTab === "code" && "bg-indigo-500 bg-opacity-25  text-indigo-400 font-semibold shadow-sm shadow-slate-950"} rounded-2xl px-2 py-1 text-indigo-500 transition-all duration-300 hover:bg-slate-700`}
+            >
+              Code
+            </h2>
+          </Hint>
+          <Hint label="See Preview" side="top" allignOffset={20}>
+            <h2
+              onClick={() => setActivetab("preview")}
+              className={`cursor-pointer hover:bg-opacity-30 ${activeTab === "preview" && "bg-indigo-500 bg-opacity-25  text-indigo-400 font-semibold shadow-sm shadow-slate-950"} text-indigo-500 rounded-2xl px-2 py-1 transition-all duration-300 hover:bg-slate-700`}
+            >
+              Preview
+            </h2>
+          </Hint>
         </div>
       </div>
       <SandpackProvider

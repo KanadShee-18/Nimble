@@ -8,15 +8,15 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { UserDetailsContext } from "@/context/UserDetailsContext";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
+import { motion } from "motion/react";
 
 const PricingModel = () => {
   const { userDetails } = useContext(UserDetailsContext);
-  console.log("User details in pricing paypal page: ", userDetails);
   const [selectedPayment, setSelectedPayment] = useState();
   const UpdateTokenForUser = useMutation(api.users.UpdateTokenUsed);
   const handlePaymentSuccess = async () => {
     const token = userDetails?.token + Number(selectedPayment?.value);
-    console.log("Added token: ", token);
 
     await UpdateTokenForUser({
       token: token,
@@ -27,9 +27,13 @@ const PricingModel = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10">
       {PROVIDED_DEPENDENCIES.PRICING_OPTIONS.map((pricing) => (
-        <div
+        <motion.div
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 70 }}
+          transition={{ duration: 1, ease: "easeIn" }}
+          viewport={{ once: true }}
           key={pricing.name}
-          className="border-[1px] w-[310px] mx-auto p-4 rounded-lg bg-zinc-900"
+          className="border-[1px] cursor-pointer w-[310px] mx-auto p-4 rounded-lg bg-[#191722]"
         >
           <div className="flex flex-col gap-y-3">
             <h2 className="text-3xl text-nowrap font-bold text-zinc-300">
@@ -57,9 +61,8 @@ const PricingModel = () => {
           <PayPalButtons
             onClick={() => {
               setSelectedPayment(pricing);
-              console.log("Pricing token value: ", pricing.value);
             }}
-            onCancel={() => console.log("Payment cancelled!")}
+            onCancel={() => toast.message("Payment has been cancelled!")}
             onApprove={() => handlePaymentSuccess()}
             style={{
               layout: "horizontal",
@@ -80,7 +83,7 @@ const PricingModel = () => {
               });
             }}
           />
-        </div>
+        </motion.div>
       ))}
     </div>
   );

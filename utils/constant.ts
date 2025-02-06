@@ -119,23 +119,27 @@ export const SidebarFooterDefault = [
     name: "Settings",
     icon: Settings,
     path: "/settings",
+    label: "Go to Settings",
     id: 1,
   },
   {
     name: "Help Center",
     icon: HelpCircleIcon,
     path: "/contact",
+    label: "Contact Us",
     id: 2,
   },
   {
     name: "Subscription",
     icon: Wallet2,
     path: "/pricing",
+    label: "Buy Tokens",
     id: 3,
   },
   {
     name: "Sign out",
     icon: LogOutIcon,
+    label: "Log Out",
     id: 4,
   },
 ];

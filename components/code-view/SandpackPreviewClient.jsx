@@ -14,9 +14,8 @@ function SandpackPreviewClient() {
   const GetClientFromSandPack = async () => {
     const client = previewRef.current?.getClient();
     if (client) {
-      console.log("CLient is: ", client);
+   
       const clientResult = await client.getCodeSandboxURL();
-      console.log("Client res: ", clientResult);
 
       if (action?.actionType === "deploy") {
         window.open(`https://${clientResult.sandboxId}.csb.app/`);
@@ -26,7 +25,6 @@ function SandpackPreviewClient() {
     }
   };
 
-  console.log("Action in sandbox page: ", action);
 
   useEffect(() => {
     GetClientFromSandPack();

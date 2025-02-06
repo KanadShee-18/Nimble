@@ -19,10 +19,10 @@ export const sendVerificationEmail = async ({
 }: EmailSendingProps) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
+      host: `${process.env.MAIL_HOST}`,
       auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        user: `${process.env.MAIL_USER}`,
+        pass: `${process.env.MAIL_PASS}`,
       },
     });
 
@@ -31,16 +31,16 @@ export const sendVerificationEmail = async ({
       type === "VERIFY"
         ? `${baseUrl}/auth/email-confirmation?token=${token}`
         : type === "RESET"
-        ? `${baseUrl}/auth/new-password?token=${token}`
-        : "";
+          ? `${baseUrl}/auth/new-password?token=${token}`
+          : "";
 
     // Get the HTML template based on the type
     const html =
       type === "TWO_FA"
         ? emailTemplates.TWO_FA(token)
         : type === "VERIFY"
-        ? emailTemplates.VERIFY(confirmLink, body)
-        : emailTemplates.RESET(confirmLink, body);
+          ? emailTemplates.VERIFY(confirmLink, body)
+          : emailTemplates.RESET(confirmLink, body);
 
     // Send the email
     await transporter.sendMail({

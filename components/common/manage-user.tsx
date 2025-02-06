@@ -12,6 +12,7 @@ import { Separator } from "../ui/separator";
 import { ChartNoAxesGantt, LogOutIcon } from "lucide-react";
 import LogoutButton from "../auth/logout-button";
 import { useRouter } from "next/navigation";
+import { Hint } from "./tool-tip";
 
 interface UserButtonProps {
   userName: string | null | undefined;
@@ -35,9 +36,11 @@ const UserButton = ({ userEmail, userName, userImage }: UserButtonProps) => {
                 className="w-10 h-10 rounded-full object-cover"
               />
             ) : (
-              <Button className="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-indigo-300 hover:text-slate-800 text-lg">
-                {userName?.charAt(0)?.toUpperCase()}
-              </Button>
+              <Hint label="User" side="bottom" allignOffset={18}>
+                <Button className="bg-indigo-700 w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-indigo-300 hover:text-slate-800 text-lg">
+                  {userName?.charAt(0)?.toUpperCase()}
+                </Button>
+              </Hint>
             )}
           </div>
         </PopoverTrigger>
