@@ -16,10 +16,14 @@ export async function POST(req) {
     }
 
     const result = await GenAiCode.sendMessage(prompt);
+    console.log("In server gen ai response: ", result);
+
     const response = result?.response.text();
 
     return NextResponse.json(JSON.parse(response));
   } catch (error) {
+    console.log("Error in gen ai code: ", error);
+
     return NextResponse.json(
       {
         success: false,
