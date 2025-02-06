@@ -44,7 +44,7 @@ export const sendVerificationEmail = async ({
 
     // Send the email
     await transporter.sendMail({
-      from: `"Next-Auth - by Kanad" <${process.env.MAIL_USER}>`,
+      from: `"Nimble - AI-powered App Builder" <${process.env.MAIL_USER}>`,
       to: email,
       subject: title,
       html,

@@ -19,6 +19,8 @@ import FormSuccess from "@/components/auth/form-success";
 import FormError from "@/components/auth/form-error";
 import * as z from "zod";
 import { register } from "@/actions/register";
+import Spinner from "../common/spinner-loader";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -158,11 +160,13 @@ const RegisterForm = () => {
           {error && <FormError errorMessage={error} />}
           <Button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-slate-700 active:bg-blue-500"
+            className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-slate-700 hover:bg-gradient-to-l hover:from-blue-500 hover:via-indigo-500 hover:to-slate-700 active:bg-blue-500 text-white font-medium tracking-wider hover:scale-95 duration-300 transition-all group"
             disabled={loading}
-            variant={"secondary"}
           >
-            {loading ? "Submitting" : "SIGN UP"}
+            {loading ? "SUBMITTING" : "SIGN UP"}
+            <span className="group-hover:translate-x-2 duration-300 transition-all">
+              {loading ? <Spinner /> : <FaArrowRightLong />}
+            </span>
           </Button>
         </form>
       </Form>

@@ -21,6 +21,8 @@ import * as z from "zod";
 import { useSearchParams } from "next/navigation";
 import { resetPassword } from "@/actions/resetPassword";
 import { BeatLoader } from "react-spinners";
+import { FaArrowRightLong } from "react-icons/fa6";
+import Spinner from "../common/spinner-loader";
 
 const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -117,11 +119,13 @@ const NewPasswordForm = () => {
 
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-slate-800 active:bg-blue-500 tracking-wider"
+            className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-slate-700 hover:bg-gradient-to-l hover:from-blue-500 hover:via-indigo-500 hover:to-slate-700 active:bg-blue-500 text-white font-medium tracking-wider hover:scale-95 duration-300 transition-all group"
             disabled={loading}
-            variant={"secondary"}
           >
-            {loading ? "Submitting" : "RESET PASSWORD"}
+            {loading ? "SUBMITTING" : "RESET PASSWORD"}
+            <span className="group-hover:translate-x-2 duration-300 transition-all">
+              {loading ? <Spinner /> : <FaArrowRightLong />}
+            </span>
           </Button>
         </form>
       </Form>

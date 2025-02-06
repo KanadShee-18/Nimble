@@ -21,6 +21,7 @@ import { CountTokenUsed } from "./chat-section";
 import SandpackPreviewClient from "../code-view/SandpackPreviewClient";
 import { SandboxActionContext } from "@/context/ActionContext";
 import { Hint } from "../common/tool-tip";
+import { toast } from "sonner";
 
 const CodeSection = () => {
   const { id } = useParams();
@@ -48,37 +49,49 @@ const CodeSection = () => {
   const UpdateCode = useMutation(api.workspace.UpdateCodeFiles);
 
   const GenerateCode = async () => {
-    setLoading(true);
-    const PROMPT = JSON.stringify(messages) + " " + Prompt.CODE_GEN_PROMPT;
-    const result = await axios.post("/api/gen-ai-code", {
-      prompt: PROMPT,
-    });
-
-    const aiRes = result?.data;
-
-    const mergedFiles = {
-      ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
-
-      ...aiRes?.files,
-    };
-    setFiles(mergedFiles);
-    await UpdateCode({
-      workspaceId: id,
-      fileData: aiRes.files,
-    });
-    if (userDetails?.token) {
-      const token =
-        userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiRes)));
-      await UpdateUserToken({
-        userId: userDetails._id,
-        token: token,
+    try {
+      setLoading(true);
+      const PROMPT = JSON.stringify(messages) + " " + Prompt.CODE_GEN_PROMPT;
+      const result = await axios.post("/api/gen-ai-code", {
+        prompt: PROMPT,
       });
-      setUserDetails((prev) => ({
-        ...prev,
-        token: token,
-      }));
+
+      const aiRes = result?.data;
+
+      if (!aiRes?.success) {
+        toast.message("Failed to generate code. Try again!");
+      }
+
+      const mergedFiles = {
+        ...PROVIDED_DEPENDENCIES.DEFAULT_FILE,
+
+        ...aiRes?.files,
+      };
+      setFiles(mergedFiles);
+      await UpdateCode({
+        workspaceId: id,
+        fileData: aiRes.files,
+      });
+      if (userDetails?.token) {
+        const token =
+          userDetails?.token - Number(CountTokenUsed(JSON.stringify(aiRes)));
+        await UpdateUserToken({
+          userId: userDetails._id,
+          token: token,
+        });
+        setUserDetails((prev) => ({
+          ...prev,
+          token: token,
+        }));
+      }
+      setLoading(false);
+    } catch (error) {
+      toast.message(
+        "Some error occurred while generating the code. Try again!"
+      );
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const existingCodeFiles = async () => {
