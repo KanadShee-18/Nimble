@@ -92,6 +92,8 @@ const SettingsPage = () => {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-[#0d0c11]">
+      <div className="absolute top-0 h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#0e0e17_1px)] bg-[size:25px_25px]"></div>
+      <div className="w-3/4 h-3/4 fixed top-0 right-0 bg-gradient-to-br from-green-700 via-indigo-700 to-slate-700  rounded-full opacity-30 blur-[240px]" />
       <div className="w-3/4 h-3/4 fixed -bottom-1/4 -left-1/4 bg-gradient-to-br from-emerald-600 via-indigo-500 to-slate-700 rounded-full opacity-35 blur-[200px]" />
       <Card className="relative max-w-md p-2 min-w-[300px] md:min-w-[400px] mx-auto bg-slate-950">
         <CardHeader className="bg-slate-900 rounded-md">
@@ -230,7 +232,7 @@ const SettingsPage = () => {
                 disabled={loading}
                 className="w-full bg-indigo-600 text-white tracking-wider hover:bg-indigo-900 hover:shadow-sm hover:shadow-indigo-600"
               >
-                {loading ? "SAVING" : "SAVE"}
+                {loading ? "UPDATING" : "UPDATE"}
               </Button>
             </form>
           </Form>

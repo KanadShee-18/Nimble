@@ -43,89 +43,6 @@ export const ResetPasswordSchema = z.object({
   }),
 });
 
-// export const SettingsSchema = z
-//   .object({
-//     name: z.optional(z.string().min(1, {message: "Name can't be empty!"})),
-//     isTwoFactorEnabled: z.optional(z.boolean()),
-//     email: z.optional(z.string().email({message: "Please enter a valid email"})),
-//     password: z.optional(
-//       z
-//         .string()
-//         .min(6, { message: "Password must be at least 6 characters(s)" })
-//     ),
-//     newPassword: z.optional(
-//       z
-//         .string()
-//         .min(6, { message: "Password must be at least 6 characters(s)" })
-//     ),
-//   })
-//   .refine(
-//     (data) => {
-//       if (data.password && !data.newPassword) {
-//         return false;
-//       }
-
-//       return true;
-//     },
-//     {
-//       message: "New Password is required!",
-//       path: ["newPassword"],
-//     }
-//   )
-//   .refine(
-//     (data) => {
-//       if (!data.password && data.newPassword) {
-//         return false;
-//       }
-
-//       return true;
-//     },
-//     {
-//       message: "Password is required!",
-//       path: ["Password"],
-//     }
-//   );
-
-// export const SettingsSchema = z
-//   .object({
-//     name: z
-//       .string()
-//       .or(z.literal(""))
-//       .refine((val) => val.trim().length > 0 || val === "", {
-//         message: "Name can't be empty!",
-//       }),
-
-//     isTwoFactorEnabled: z.boolean().optional(),
-
-//     email: z
-//       .string()
-//       .or(z.literal(""))
-//       .refine(
-//         (val) => (val ? z.string().email().safeParse(val).success : true),
-//         {
-//           message: "Please enter a valid email address!",
-//         }
-//       ),
-
-//     password: z
-//       .string()
-//       .min(6, { message: "Password must be at least 6 characters(s)" })
-//       .optional(),
-
-//     newPassword: z
-//       .string()
-//       .min(6, { message: "Password must be at least 6 characters(s)" })
-//       .optional(),
-//   })
-//   .refine((data) => !(data.password && !data.newPassword), {
-//     message: "New Password is required!",
-//     path: ["newPassword"],
-//   })
-//   .refine((data) => !(!data.password && data.newPassword), {
-//     message: "Current Password is required!",
-//     path: ["password"],
-//   });
-
 export const SettingsSchema = z
   .object({
     // Name: Optional, but must not be an empty string
@@ -189,3 +106,15 @@ export const SettingsSchema = z
       path: ["password"],
     }
   );
+
+export const ContactSchema = z.object({
+  name: z.string({
+    message: "Name is required!",
+  }),
+  email: z.string().email({
+    message: "Email is required!",
+  }),
+  message: z.string().min(10, {
+    message: "Message length should be minimum of 10  characters.",
+  }),
+});

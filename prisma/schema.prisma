@@ -75,3 +75,10 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model UserMessage {
+  id        String @id @default(cuid())
+  userName  String
+  userEmail String
+  userMsg   String
+}

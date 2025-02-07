@@ -27,7 +27,10 @@ const ActionButton = () => {
   return (
     <div
       className={`flex flex-row gap-x-4 ${
-        pathname === "/" || pathname === "/pricing" || pathname === "/settings"
+        pathname === "/" ||
+        pathname === "/pricing" ||
+        pathname === "/settings" ||
+        pathname === "/contact"
           ? "hidden"
           : "block"
       }`}
