@@ -7,6 +7,7 @@ import HomeButton from "../auth/home-button";
 import RegisterButton from "../auth/register-button";
 import ActionButton from "../navbar/action-buttons";
 import NimbleLogo from "@/public/Images/mnl.png";
+import ContactButton from "./contact-button";
 
 const NavBar = async () => {
   const user = await currentUser();
@@ -19,8 +20,13 @@ const NavBar = async () => {
         width={70}
         height={70}
       />
-      <div className="flex items-center gap-x-5">
-        {!user && <SignInButton />}
+      <div className="flex items-center gap-x-3">
+        {!user && (
+          <>
+            <SignInButton />
+            <ContactButton />
+          </>
+        )}
         {user ? (
           <>
             <HomeButton />

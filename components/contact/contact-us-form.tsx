@@ -7,11 +7,7 @@ import { useForm } from "react-hook-form";
 import { ContactSchema } from "@/schemas";
 import FormSuccess from "@/components/auth/form-success";
 import FormError from "@/components/auth/form-error";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   Form,
@@ -145,7 +141,7 @@ const ContactUsForm = () => {
                           <textarea
                             {...field}
                             name="email"
-                            placeholder="Enter your email "
+                            placeholder="Enter your message "
                             className="w-full rounded-md bg-transparent border max-h-[100px] min-h-[100px] text-sm p-2 shadow-sm shadow-indigo-600 outline-none scrollbar-hide text-indigo-400 tracking-wide"
                           />
                         </FormControl>
@@ -158,10 +154,10 @@ const ContactUsForm = () => {
               {success && <FormSuccess successMessage={success} />}
               {error && <FormError errorMessage={error} />}
 
-              <div>
+              <div className="p-4">
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-slate-700 hover:bg-gradient-to-l hover:from-blue-500 hover:via-indigo-500 hover:to-slate-700 active:bg-blue-500 text-white font-medium tracking-wider hover:scale-95 duration-300 transition-all group"
+                  className="w-full  bg-gradient-to-r from-blue-500 via-indigo-500 to-slate-700 hover:bg-gradient-to-l hover:from-blue-500 hover:via-indigo-500 hover:to-slate-700 active:bg-blue-500 text-white font-medium tracking-wider hover:scale-95 duration-300 transition-all group"
                   disabled={loading}
                 >
                   {loading ? "SUBMITTING" : "SUBMIT MESSAGE"}
