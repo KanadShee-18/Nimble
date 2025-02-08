@@ -33,31 +33,31 @@ const FrameWorks = () => {
         />
         <Image
           src={NEXT_LOGO}
-          alt="React"
+          alt="Next"
           className="w-10 opacity-30 hover:opacity-75 cursor-pointer bg-white rounded-full transition-opacity duration-300"
         />
         <Image
           src={ANGULAR_LOGO}
-          alt="React"
+          alt="Angular"
           className="w-10 opacity-30 hover:opacity-75 cursor-pointer transition-opacity duration-300"
         />
       </div>
       <div className="flex gap-x-5 items-center">
         <Image
           src={TAILWIND_LOGO}
-          alt="React"
+          alt="Tailwind"
           className="w-10 h-8 opacity-30 hover:opacity-75 cursor-pointer transition-opacity duration-300"
         />
         <Image
           src={BOOTSTRAP_LOGO}
-          alt="React"
+          alt="Bootstrap"
           className="w-10 opacity-30 hover:opacity-75 cursor-pointer bg-white rounded-full transition-opacity duration-300"
         />
       </div>
       <div className="flex gap-x-5 items-center">
         <Image
           src={VITE_LOGO}
-          alt="React"
+          alt="Vite"
           className="w-10 h-8 opacity-30 hover:opacity-75 cursor-pointer transition-opacity duration-300"
         />
       </div>
