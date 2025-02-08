@@ -12,6 +12,7 @@ import uuid4 from "uuid4";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+import FrameWorks from "./framework-section";
 
 const Hero = ({ user }) => {
   const router = useRouter();
@@ -140,8 +141,14 @@ const Hero = ({ user }) => {
         {constant?.SUGGSTIONS.map((suggestion, index) => (
           <motion.h2
             whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 30 }}
-            transition={{ duration: 1, delay: 1.5, ease: [0, 0.71, 0.2, 1.01] }}
+            initial={{ opacity: 0, y: 20 }}
+            transition={{
+              duration: 1,
+              delay: 1.5,
+              type: "spring",
+              stiffness: 40,
+              damping: 30,
+            }}
             viewport={{ once: true }}
             onClick={() => onGenerate(suggestion)}
             className="hover:bg-indigo-900 hover:bg-opacity-50 px-3 py-1 rounded-2xl shadow-sm shadow-slate-800 backdrop-blur-sm text-xs text-slate-400 hover:text-zinc-200 font-medium cursor-pointer transition-all duration-200 hover:scale-105 tracking-wide"
@@ -151,6 +158,8 @@ const Hero = ({ user }) => {
           </motion.h2>
         ))}
       </motion.div>
+      <FrameWorks />
+
       {/* Sign In Dialog */}
       <SignInDialog
         openDialog={openDialog}
