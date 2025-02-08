@@ -77,7 +77,7 @@ Nimble is built using modern web technologies for **speed, scalability, and reli
   ![Landing Page](Images/nimble_main.png)
 
 - **Workspace**
-  ![Workspace Page](Images/workspace.png)
+  ![Workspace Page](Images/workspace-preview.png)
 
 - **AI Chat & Code Preview**
   ![AI Chat](Images/code-with-chat.png)
@@ -177,7 +177,7 @@ yarn dev  # or npm run dev
 | Base      | 50,000    | $4.99  |
 | Starter   | 120,000   | $9.99  |
 | Pro       | 2,500,000 | $19.99 |
-| Unlimited | Unlimited | $19.99 |
+| Unlimited | Unlimited | $49.99 |
 
 ---
 
