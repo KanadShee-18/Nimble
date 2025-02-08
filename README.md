@@ -97,7 +97,7 @@ Follow these steps to set up Nimble on your local machine.
 ### 1️⃣ Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/nimble.git
+git clone https://github.com/KanadShee-18/Nimble.git
 cd nimble
 ```
 
@@ -145,6 +145,12 @@ MAIL_PASS=your-email-password
 
 ```sh
 yarn dev  # or npm run dev
+```
+
+and also in another terminal run,
+
+```sh
+npx convex dev
 ```
 
 - The app will be live at `http://localhost:3000`
