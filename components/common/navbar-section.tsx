@@ -1,16 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { currentUser } from "@/lib/auth";
-import UserButton from "./manage-user";
-import SignInButton from "./signin-button";
-import HomeButton from "../auth/home-button";
-import RegisterButton from "../auth/register-button";
-import ActionButton from "../navbar/action-buttons";
 import NimbleLogo from "@/public/Images/mnl.png";
-import ContactButton from "./contact-button";
+import ResponsiveMenu from "./nav-controller-buttons";
 
 const NavBar = async () => {
   const user = await currentUser();
+
   return (
     <div className="px-4 py-1 w-full fixed top-0 flex justify-between items-center text-sm z-[100] backdrop-blur-md border-b-[1px] border-b-zinc-800">
       <Image
@@ -20,30 +16,32 @@ const NavBar = async () => {
         width={70}
         height={70}
       />
-      <div className="flex items-center gap-x-3">
-        {!user && (
-          <>
-            <SignInButton />
-            <ContactButton />
-          </>
-        )}
-        {user ? (
-          <>
-            <HomeButton />
-            <ActionButton />
-            {/* <ExportButton /> */}
-            {/* <DeployButton /> */}
+      {/* <div className="relative">
+        <div className="flex absolute items-center gap-x-3">
+          {!user && (
+            <>
+              <SignInButton />
+              <ContactButton />
+            </>
+          )}
+          {user ? (
+            <>
+              <HomeButton />
+              <ActionButton />
 
-            <UserButton
-              userName={user.name}
-              userEmail={user.email}
-              userImage={user.image}
-            />
-          </>
-        ) : (
-          <RegisterButton />
-        )}
-      </div>
+              <UserButton
+                userName={user.name}
+                userEmail={user.email}
+                userImage={user.image}
+              />
+            </>
+          ) : (
+            <RegisterButton />
+          )}
+        </div>
+      </div> */}
+
+      <ResponsiveMenu user={user} />
     </div>
   );
 };

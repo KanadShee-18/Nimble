@@ -118,7 +118,7 @@ const ChatSecion = ({ userName, userImage, userEmail }) => {
   };
 
   return (
-    <div className="h-[85vh] relative flex flex-col ">
+    <div className="h-[85vh] relative flex flex-col">
       <div className="flex-1 overflow-y-scroll ">
         {messages && Array.isArray(messages) ? (
           messages?.map((msg, index) => (

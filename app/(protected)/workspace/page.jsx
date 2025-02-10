@@ -61,16 +61,16 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center flex-col p-10 pt-32">
-      <div className="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#0e0e17_1px)] bg-[size:25px_25px]"></div>
+    <div className="w-full relative min-h-screen flex items-center flex-col p-10 pt-32">
+      <div className="absolute inset-0 z-[-2] h-full w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#0e0e17_1px)] bg-[size:25px_25px]"></div>
       <div className="w-3/4 h-3/4 fixed top-0 right-0 bg-gradient-to-br from-green-700 via-indigo-700 to-slate-700  rounded-full opacity-30 blur-[240px]" />
-      <h2 className="text-4xl font-semibold text-indigo-300 flex items-center justify-center gap-x-3">
-        <LayoutList className="w-10 h-10" />
+      <h2 className="md:text-4xl text-2xl font-semibold text-indigo-300 flex items-center justify-center gap-x-3">
+        <LayoutList className="md:w-10 w-6 md:h-10 h-6" />
         Your Projects
       </h2>
 
       {/* Filter Buttons */}
-      <div className="flex flex-row gap-x-3 my-10 relative">
+      <div className="hidden lg:flex items-start flex-row gap-x-3 my-10 relative">
         <Hint label="See Filters" side="top">
           <Button
             onClick={() => setShowFilters((prev) => !prev)}
@@ -145,7 +145,7 @@ const Page = () => {
       </div>
 
       {/* Workspaces List */}
-      <div className="mx-auto w-screen overflow-hidden">
+      <div className="mx-auto w-screen overflow-hidden mt-10 lg:mt-0">
         {workSpaces && Array.isArray(workSpaces) ? (
           <div className="flex flex-wrap gap-3 max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
             {workSpaces?.map((workSpace, index) => {

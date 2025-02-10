@@ -30,6 +30,7 @@ const ActionButton = () => {
         pathname === "/" ||
         pathname === "/pricing" ||
         pathname === "/settings" ||
+        pathname === "/workspace" ||
         pathname === "/contact"
           ? "hidden"
           : "block"

@@ -8,7 +8,7 @@ const Socials = () => {
   return (
     <div className="w-full">
       <hr />
-      <p className="w-full my-6 text-center text-sm text-slate-300">
+      <p className="w-full my-6 text-center md:text-sm text-xs text-slate-300">
         Or, Sign in with
       </p>
 

@@ -33,10 +33,10 @@ const PricingModel = () => {
           transition={{ duration: 1, ease: "easeIn" }}
           viewport={{ once: true }}
           key={pricing.name}
-          className="border-[1px] cursor-pointer w-[310px] mx-auto p-4 rounded-lg bg-[#191722]"
+          className="border-[1px] cursor-pointer md:w-[310px] w-[270px] mx-auto p-4 rounded-lg bg-[#191722]"
         >
           <div className="flex flex-col gap-y-3">
-            <h2 className="text-3xl text-nowrap font-bold text-zinc-300">
+            <h2 className="md:text-3xl text-2xl text-nowrap font-bold text-zinc-300">
               {pricing.name}
             </h2>
             <h3 className="flex items-center text-zinc-300 font-semibold gap-2 text-sm">

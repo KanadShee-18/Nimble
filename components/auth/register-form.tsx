@@ -74,9 +74,9 @@ const RegisterForm = () => {
         <form
           action=""
           onSubmit={form.handleSubmit(handleOnSubmit)}
-          className="space-y-6"
+          className="md:space-y-6 space-y-3"
         >
-          <div className="space-y-4">
+          <div className="md:space-y-4 space-y-2">
             <FormField
               control={form.control}
               name="email"
@@ -89,7 +89,7 @@ const RegisterForm = () => {
                       disabled={loading}
                       type="email"
                       placeholder="Enter email address"
-                      className="shadow-sm shadow-slate-600 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-slate-600 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />
@@ -108,7 +108,7 @@ const RegisterForm = () => {
                       disabled={loading}
                       type="text"
                       placeholder="Enter your name"
-                      className="shadow-sm shadow-slate-600 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-slate-600 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />
@@ -127,7 +127,7 @@ const RegisterForm = () => {
                       disabled={loading}
                       type="password"
                       placeholder="Enter a strong password"
-                      className="shadow-sm shadow-slate-600 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-slate-600 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />
@@ -148,7 +148,7 @@ const RegisterForm = () => {
                       disabled={loading}
                       type="password"
                       placeholder="Confirm your password"
-                      className="shadow-sm shadow-slate-600 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-slate-600 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />

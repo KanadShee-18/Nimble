@@ -11,7 +11,7 @@ const ContactButton = () => {
     <div>
       <Button
         onClick={() => router.push("/contact")}
-        className="tracking-wider bg-slate-900 border-[1px] border-indigo-600 group text-indigo-400"
+        className="tracking-wider w-full bg-slate-900 border-[1px] border-indigo-600 group text-indigo-400"
         variant={"ghost"}
       >
         Contact

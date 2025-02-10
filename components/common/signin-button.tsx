@@ -11,7 +11,7 @@ const SignInButton = () => {
     <div>
       <Button
         onClick={() => router.push("/auth/login")}
-        className="tracking-wider group text-indigo-400"
+        className="tracking-wider group w-full lg:w-auto text-indigo-400"
         variant={"ghost"}
       >
         Sign In

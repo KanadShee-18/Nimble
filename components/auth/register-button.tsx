@@ -11,7 +11,7 @@ const RegisterButton = () => {
     <div>
       <Button
         onClick={() => router.push("/auth/register")}
-        className="text-white group tracking-wider bg-indigo-500 hover:bg-blue-600"
+        className="text-white group tracking-wider w-full bg-indigo-500 hover:bg-blue-600"
       >
         Get Started
         <Sparkles className="group-hover:scale-125 duration-300 transition-all" />

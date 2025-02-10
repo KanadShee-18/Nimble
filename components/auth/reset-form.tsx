@@ -83,7 +83,7 @@ const ResetForm = () => {
                       disabled={loading}
                       type="email"
                       placeholder="Enter registered email address"
-                      className="shadow-sm shadow-blue-700 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-blue-700 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />

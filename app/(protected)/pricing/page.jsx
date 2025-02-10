@@ -26,11 +26,11 @@ const PricingPage = () => {
           initial={{ opacity: 0, y: -30 }}
           transition={{ duration: 1, ease: "easeIn" }}
           viewport={{ once: true }}
-          className="text-5xl font-semibold text-indigo-200"
+          className="lg:text-5xl md:text-4xl text-3xl font-semibold text-indigo-200"
         >
           PRICING
         </motion.h1>
-        <p className="text-center max-w-xl text-zinc-500 font-medium">
+        <p className="text-center max-w-xl md:text-base text-sm px-4 text-zinc-500 font-medium">
           {PROVIDED_DEPENDENCIES.PRICING_DESC}
         </p>
 
@@ -45,13 +45,13 @@ const PricingPage = () => {
             duration: 0.8,
           }}
           viewport={{ once: true }}
-          className="flex items-center mx-auto p-5 border-[1px] border-indigo-950 w-10/12 lg:w-3/4 justify-between rounded-2xl text-sm text-zinc-400 bg-[#191722]"
+          className="flex items-center mx-auto md:p-5 p-2 border-[1px] border-indigo-950 w-10/12 lg:w-3/4 justify-between rounded-2xl text-sm text-zinc-400 bg-[#191722]"
         >
           <h2 className="flex items-center gap-2 hover:text-indigo-500 cursor-pointer font-medium">
             <Droplets className="w-4 h-4" />
             {getUserByEmail?.token} tokens left
           </h2>
-          <div className="flex flex-col">
+          <div className="flex flex-col md:gap-y-0 gap-y-3">
             <p className="hover:text-indigo-500 cursor-pointer flex gap-2 items-center font-medium">
               <CircleEllipsis className="w-4 h-4" />
               Need more tokens?

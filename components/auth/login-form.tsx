@@ -104,7 +104,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="text"
                           placeholder="Enter your code here"
-                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-500"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm md:text-base shadow-sm shadow-indigo-500"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />
@@ -129,7 +129,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="email"
                           placeholder="Enter registered email address"
-                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-500"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm md:text-base  shadow-sm shadow-indigo-500"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />
@@ -148,7 +148,7 @@ const LoginForm = () => {
                           disabled={loading}
                           type="password"
                           placeholder="Enter your password"
-                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm shadow-indigo-600"
+                          className="focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm md:text-base shadow-sm shadow-indigo-600"
                         />
                       </FormControl>
                       <FormMessage className="text-rose-400" />

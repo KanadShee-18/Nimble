@@ -85,7 +85,7 @@ const NewPasswordForm = () => {
                       disabled={loading}
                       type="password"
                       placeholder="Enter new password"
-                      className="shadow-sm shadow-blue-700 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-blue-700 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />
@@ -106,7 +106,7 @@ const NewPasswordForm = () => {
                       disabled={loading}
                       type="password"
                       placeholder="Confirm new password"
-                      className="shadow-sm shadow-blue-700 text-blue-400"
+                      className="shadow-sm text-sm md:text-base shadow-blue-700 text-blue-400"
                     />
                   </FormControl>
                   <FormMessage className="text-rose-400" />
