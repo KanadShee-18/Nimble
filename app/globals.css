@@ -28,8 +28,10 @@ body {
 }
 
 /* For Firefox */
-scrollbar-width: thin; /* Set the scrollbar width to thin */
-scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
+* {
+  scrollbar-width: thin; /* Set the scrollbar width to thin */
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
+}
 
 @layer base {
   :root {

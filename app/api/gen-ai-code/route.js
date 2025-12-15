@@ -1,9 +1,7 @@
 import { GenAiCode } from "@/configs/AiModel";
 import { NextResponse } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export async function POST(req) {
   try {
